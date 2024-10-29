@@ -1,0 +1,19 @@
+.formularios-containers {
+    background: rgba(40, 5, 236); /* Fondo blanco semitransparente para el formulario */
+    padding: 20px;
+    border-radius: 10px black solid;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra para resaltar el formulario */
+    text-align: center;
+    display: flex;
+    position: relative;
+  }
+  
+  /* Estilos específicos para el formulario (opcional) */
+  .form {
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .label,.select, .button {
+    margin-bottom: 10px;
+  }

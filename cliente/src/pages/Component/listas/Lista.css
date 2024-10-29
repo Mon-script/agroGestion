@@ -1,0 +1,12 @@
+.campo-texto{
+    margin: 22px 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.campo-texto label{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+}

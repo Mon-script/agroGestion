@@ -1,0 +1,168 @@
+/* Contenedor de tarjetas */
+.cards {
+  display: flex;
+  height: 250px;
+  width: 190px;
+  background-color: transparent;
+  border-radius: 10px;
+  box-shadow: -1rem 0 3rem #00000044;
+  margin: 40px;
+  transition: 0.4s ease-out;
+  position: relative;
+  flex-wrap: wrap;
+  margin-bottom: 4em;
+}
+
+.cards:not(:first-child) {
+  margin-left: -10px;
+}
+
+.cards:hover {
+  transform: translateY(10px);
+  transition: 0.4s ease-out;
+  text-shadow: 2px 2px 8px #6e5b94;
+}
+
+.cards:hover ~ .cards {
+  position: relative;
+  left: 0px;
+  transform: rotateX(-15deg) rotateY(10deg);
+  transition: 0.4s ease-out;
+}
+
+.title-1 {
+  color: #413838;
+  font-size: 28px;
+  font-weight: 800;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+
+.btn {
+  position: absolute;
+  top: 260px;
+  margin: 0 20px;
+  width: 60px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background-color: #080114;
+  color: #fff;
+  transition: 0.4s ease-out;
+}
+
+.btn1{
+  position: absolute;
+  top: 260px;
+  margin: 0 100px;
+  width: 60px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background-color: #080114;
+  color: #fff;
+  transition: 0.4s ease-out;
+}
+
+.btnp{
+  position: absolute;
+  top: 260px;
+  margin: 0 50px;
+  width: 60px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background-color: #080114;
+  color: #fff;
+  transition: 0.4s ease-out;
+}
+
+
+
+.btn:hover {
+  transition: 0.4s ease-out;
+  background-color: #000700;
+  color: #05f318;
+  box-shadow: 0px 0px 20px rgba(2, 250, 56, 0.5),
+    0px 5px 5px -1px #04f34040,
+    inset 4px 4px 8px rgba(2, 247, 43, 0.5),
+    inset -4px -4px 8px rgba(69, 235, 3, 0.35);
+}
+
+.btn1:hover {
+  transition: 0.4s ease-out;
+  background-color: #070300;
+  color: #fa0404;
+  box-shadow: 0px 0px 20px rgba(247, 1, 1, 0.5),
+    0px 5px 5px -1px #df121240,
+    inset 4px 4px 8px rgba(241, 13, 5, 0.5),
+    inset -4px -4px 8px rgba(216, 32, 19, 0.35);
+}
+.btnp:hover {
+  transition: 0.4s ease-out;
+  background-color: #070300;
+  color: #fa0404;
+  box-shadow: 0px 0px 20px rgba(247, 1, 1, 0.5),
+    0px 5px 5px -1px #df121240,
+    inset 4px 4px 8px rgba(241, 13, 5, 0.5),
+    inset -4px -4px 8px rgba(216, 32, 19, 0.35);
+}
+
+
+
+.bar {
+  position: relative;
+  top: 0px;
+  height: 8px;
+  width: 100%;
+  border-radius: 25px;
+}
+
+.emptybar {
+  background-color: #000000;
+  width: 100%;
+  height: 100%;
+}
+
+.filledbar {
+  position: absolute;
+  top: 0px;
+  z-index: 3;
+  width: 0px;
+  height: 100%;
+  background: #ffffff;
+  background: linear-gradient(90deg, #f7f2f2ab, #2604be 100%);
+  transition: 0.6s ease-out;
+}
+
+.cards:hover .filledbar {
+  width: 100%;
+  transition: 0.4s ease-out;
+}
+
+.content {
+  position: absolute;
+  padding: 30px;
+  top: 135px;
+  color: #080808;
+  font-size: 13px;
+}
+
+.stroke {
+  stroke: rgb(12, 12, 12);
+  stroke-dasharray: 360;
+  stroke-dashoffset: 360;
+  transition: 0.6s ease-out;
+}
+
+.card:hover .stroke {
+  stroke-dashoffset: 100;
+  transition: 0.6s ease-out;
+}
+
+.CodigosdeB{
+  display: flex;
+  position: absolute;
+
+}

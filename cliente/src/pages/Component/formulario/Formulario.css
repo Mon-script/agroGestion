@@ -1,0 +1,46 @@
+.ubicacion{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    max-height: 600px ;
+    background: #e3e3e3;
+    box-shadow: 16px 16px 32px #c8c8c8,
+          -16px -16px 32px #fefefe;
+    border-radius: 8px
+    
+}
+
+.Camp{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px; /* Espacio entre las columnas */
+}
+.formulario{
+    display: flex;
+    justify-content: space-evenly;
+    margin: -180px 50px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.formulario form{
+    background-color: #f7f7f7;
+    box-shadow: 7px 7px 15px rgba(0, 0, 0, 25%);
+    border-radius: 20px;
+    padding: 8px 100px;
+    flex:1;
+}
+
+.formulario h2{
+    font-size: 25px;
+    font-weight: 400;
+    color: #212121;
+}
+
+.eliminar{
+    position: absolute;
+    right: -5px;
+    top: -5px;
+}

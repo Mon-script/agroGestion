@@ -1,0 +1,10 @@
+.PosicionBottons{
+    position: absolute;
+    top: 500px;
+
+}
+
+.TarjetaProduct{
+    display: flex;
+    justify-content: space-between;
+}

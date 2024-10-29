@@ -1,0 +1,69 @@
+:root {
+    --color-primary: #333; /* Color principal (negro) */
+    --color-secondary: #f4f4f4; /* Color secundario (gris claro) */
+    --color-accent: #ff0000; /* Color de acento (naranja claro) */
+  }
+  /* Productos.css */
+.productos-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--color-secondary);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .productos-header {
+    font-size: 24px;
+    color: var(--color-secondary);
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: #fd0000;
+    padding: 15px;
+
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    
+    
+  }
+  
+  .form-label {
+    margin-bottom: 20px;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+  
+  }
+  
+  .form-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form-button {
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    
+  }
+  
+  .form-button:hover {
+    background-color: var(--color-primary);
+  }
+  button{
+    display:block;
+  }
