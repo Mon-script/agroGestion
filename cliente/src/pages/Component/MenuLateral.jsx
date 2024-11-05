@@ -1,5 +1,5 @@
 import { Sidebar } from "keep-react";
-import { TeamOutlined, UserAddOutlined, CloseCircleFilled } from '@ant-design/icons';
+import { TeamOutlined, UserAddOutlined, CloseCircleFilled, SunOutlined } from '@ant-design/icons';
 import { NavLink } from "react-router-dom";
 import {
   Storefront,
@@ -21,6 +21,7 @@ export const SidebarComponent = () => {
 
 
   const menuItemsAd = [
+    { id: 0, nombre: 'Siembra', ruta: '/siembra', icono: <SunOutlined size={32} color="#7376a0" /> },
     { id: 1, nombre: 'Producto', ruta: '/producto', icono: <Storefront size={32} color="#7376a0" /> },
     { id: 2, nombre: 'Stock', ruta: '/stock', icono: <StackOverflowLogo size={32} color="#0715cf" /> },
     { id: 3, nombre: 'Entrada', ruta: '/entrada', icono: <ArrowCircleRight size={32} color="#0adb23" /> },
@@ -30,6 +31,7 @@ export const SidebarComponent = () => {
   ];
 
   const menuItems = [
+    { id: 0, nombre: 'Siembra', ruta: '/siembra', icono: <SunOutlined size={32} color="#7376a0" /> },
     { id: 1, nombre: 'Producto', ruta: '/producto', icono: <Storefront size={32} color="#7376a0" /> },
     { id: 2, nombre: 'Stock', ruta: '/stock', icono: <StackOverflowLogo size={32} color="#0715cf" /> },
     { id: 3, nombre: 'Entrada', ruta: '/entrada', icono: <ArrowCircleRight size={32} color="#0adb23" /> },

@@ -1,7 +1,7 @@
 const connection = require("../models/db");
 
 module.exports.getEntrada = (req, res) => {
-  //const consult = 'SELECT * FROM SALIDA';
+
   const consult = `SELECT 
     E.id AS entrada_id,
     P.id_codigo_barra,

@@ -13,6 +13,7 @@ import { Entrada } from './pages/domain/entrada';
 import { Salida } from './pages/domain/salida';
 import RegistroUsuario from './pages/Component/formulario/FormularioDeRegistro'
 import { UserProvider } from './userContext';
+import Siembra from './pages/domain/siembra';
 
 
 
@@ -27,6 +28,7 @@ function App() {
           <Route element={<RutasProtegidas />}>
             <Route element={<Root />}>
               <Route index element={<Home />} />
+              <Route path='/siembra' element={<Siembra />} />
               <Route path='/producto' element={<Producto />} />
               <Route path='/stock' element={<Stock />} />
               <Route path='/entrada' element={<Entrada />} />

@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
     "animate.css": "^4.1.1",
+    "antd": "^5.21.6",
     "autoprefixer": "^10.4.16",
     "bootstrap": "^5.3.3",
     "concurrently": "^8.2.2",
