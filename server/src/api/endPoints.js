@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { login } = require('../controllers/loginController')
 const {getSalida, postEntredaSalida}= require('../controllers/salidaControler')
-const {saveProduct}=require('../controllers/productoController')
+const {saveProduct, getProductsSelect}=require('../controllers/productoController')
 const {getProducts, getPorductosId}=require('../controllers/productoController')
 const {deleteProducts}=require('../controllers/productoController')
 const {getStock}=require('../controllers/stockcontroller')
@@ -17,7 +17,7 @@ const { getFerti } = require('../controllers/tipofertilizanteController');
 const { getMarcaFerti } = require('../controllers/fertilizanteMarcaController');
 const { getTipoSemilla } = require('../controllers/tipoSemillaController');
 const { getMarcaSemillas } = require('../controllers/marcaSemillaController');
-const { getSiembraActivas } = require('../controllers/siembraController');
+const { getSiembraActivas, postSiembra } = require('../controllers/siembraController');
 
 const almacenamientoTemporal= multer.diskStorage({
     destination: path.join(__dirname,'../imagenes'),//dirnaame es una variable global
@@ -52,12 +52,14 @@ router.get('/marca_fertilizante/get',getMarcaFerti);
 router.get('/tipo_semilla/get',getTipoSemilla);
 router.get('/marca_semilla/get',getMarcaSemillas);
 router.get('/siembras/get',getSiembraActivas);
+router.get('/productos/get/select',getProductsSelect)
 
 router.post('/login', login);
 router.post('/registroUser', registrarUsuario);
 router.post('/saveProduct',avatarSubir, saveProduct);
 router.post('/post/entrada', postEntrada);
-router.post('/postEntredaSalida', postEntredaSalida)
+router.post('/postEntredaSalida', postEntredaSalida);
+router.post('/post/siembra/save', postSiembra);
 
 router.put('/reintegrarUsuario/:id', reintegroUsuario)
 

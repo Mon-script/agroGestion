@@ -32,14 +32,13 @@ INNER JOIN MARCA_SEMILLA ms ON si.id_marca_semillafk = ms.id_marca_semilla
 INNER JOIN FERTILIZANTE f ON si.id_tipo_fertilizantefk = f.id_fertilizante
 INNER JOIN MARCA_FERTILIZANTE mf ON si.id_marca_fertilizantefk = mf.id_marca_fertilizante
 INNER JOIN ESTADO e ON si.id_estado = e.id_estado
-INNER JOIN RIEGO r ON si.id_riegofk = r.id_riego`
+INNER JOIN RIEGO r ON si.id_riegofk = r.id_riego`;
   try {
     connection.query(consult, (err, result) => {
       if (err) {
         console.error(err);
         res.send(err);
       } else {
-        console.log(result);
         res.json(result);
       }
     });
@@ -82,15 +81,14 @@ INNER JOIN FERTILIZANTE f ON si.id_tipo_fertilizantefk = f.id_fertilizante
 INNER JOIN MARCA_FERTILIZANTE mf ON si.id_marca_fertilizantefk = mf.id_marca_fertilizante
 INNER JOIN ESTADO e ON si.id_estado = e.id_estado
 INNER JOIN RIEGO r ON si.id_riegofk = r.id_riego
-  WHERE si.activo = true`
-  
+  WHERE si.activo = true`;
+
   try {
     connection.query(consult, (err, result) => {
       if (err) {
         console.error(err);
         res.send(err);
       } else {
-        console.log(result);
         res.json(result);
       }
     });
@@ -100,23 +98,42 @@ INNER JOIN RIEGO r ON si.id_riegofk = r.id_riego
   }
 };
 
-
 module.exports.postSiembra = (req, res) => {
-  const { 
-    id_codigo_barrafk,
-    id_tipo_semillafk,
-    id_marca_semillafk,
+  console.log("Datos recibidos:", req.body); // Asegúrate de que esta línea aparezca en la consola
+
+  const {
+    producto,
+    tipoSemilla,
+    marcaSemilla,
     cantidad,
-    id_tipo_fertilizantefk,
-    id_marca_fertilizantefk,
-    id_estado,
-    fecha_estado,
-    id_riegofk,
-    fecha_riego,
-    fecha_siembra,
-    volumen_siembra,
-    estimacion_cosecha
+    fertilizante,
+    marcaFertilizante,
+    estado,
+    riego,
+    fechaSiembra,
+    fechaEstado,
+    fechaRiego,
+    volumenSiembra,
+    estimacionCosechaFecha,
   } = req.body;
+  if (
+    producto == null ||
+    tipoSemilla == null ||
+    marcaSemilla == null ||
+    cantidad == null ||
+    fertilizante == null ||
+    marcaFertilizante == null ||
+    estado == null ||
+    fechaEstado == null ||
+    riego == null ||
+    fechaRiego == null ||
+    fechaSiembra == null ||
+    volumenSiembra == null ||
+    estimacionCosechaFecha == null
+  ) {
+    console.log("Todos los campos son requeridos");
+    return res.status(400).json({ error: "Todos los campos son requeridos" });
+  }
 
   const consult = `INSERT INTO SIEMBRA 
     (
@@ -141,28 +158,27 @@ module.exports.postSiembra = (req, res) => {
     connection.query(
       consult,
       [
-        id_codigo_barrafk,
-        id_tipo_semillafk,
-        id_marca_semillafk,
+        producto,
+        tipoSemilla,
+        marcaSemilla,
         cantidad,
-        id_tipo_fertilizantefk,
-        id_marca_fertilizantefk,
-        id_estado,
-        fecha_estado,
-        id_riegofk,
-        fecha_riego,
-        fecha_siembra,
-        volumen_siembra,
-        estimacion_cosecha,
-        1
+        fertilizante,
+        marcaFertilizante,
+        estado,
+        fechaEstado,
+        riego,
+        fechaRiego,
+        fechaSiembra,
+        volumenSiembra,
+        estimacionCosechaFecha,
+        1,
       ],
       (err, result) => {
         if (err) {
           console.error(err);
           res.send(err);
         } else {
-          console.log(result);
-          res.json(result);
+         return res.status(200).send("Siembra guardada con exito");
         }
       }
     );
@@ -173,24 +189,22 @@ module.exports.postSiembra = (req, res) => {
 };
 
 module.exports.putSiembra = (req, res) => {
-  const { 
-    id_siembra 
-  } = req.params;
-  
-  const { 
-    id_codigo_barrafk,
-    id_tipo_semillafk,
-    id_marca_semillafk,
+  const { id_siembra } = req.params;
+
+  const {
+    producto,
+    tipoSemilla,
+    marcaSemilla,
     cantidad,
-    id_tipo_fertilizantefk,
-    id_marca_fertilizantefk,
-    id_estado,
-    fecha_estado,
-    id_riegofk,
-    fecha_riego,
-    fecha_siembra,
-    volumen_siembra,
-    estimacion_cosecha 
+    fertilizante,
+    marcaFertilizante,
+    estado,
+    riego,
+    fechaSiembra,
+    fechaEstado,
+    fechaRiego,
+    volumenSiembra,
+    estimacionCosechaFecha,
   } = req.body;
 
   const consult = `UPDATE SIEMBRA SET 
@@ -214,21 +228,21 @@ module.exports.putSiembra = (req, res) => {
     connection.query(
       consult,
       [
-        id_codigo_barrafk,
-        id_tipo_semillafk,
-        id_marca_semillafk,
+        producto,
+        tipoSemilla,
+        marcaSemilla,
         cantidad,
-        id_tipo_fertilizantefk,
-        id_marca_fertilizantefk,
-        id_estado,
-        fecha_estado,
-        id_riegofk,
-        fecha_riego,
-        fecha_siembra,
-        volumen_siembra,
-        estimacion_cosecha,
+        fertilizante,
+        marcaFertilizante,
+        estado,
+        riego,
+        fechaSiembra,
+        fechaEstado,
+        fechaRiego,
+        volumenSiembra,
+        estimacionCosechaFecha,
         1,
-        id_siembra
+        id_siembra,
       ],
       (err, result) => {
         if (err) {

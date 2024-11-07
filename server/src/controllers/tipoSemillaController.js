@@ -9,7 +9,7 @@ module.exports.getTipoSemilla= (req, res) => {
         if(err){
             res.status(500).json(err)
         }
-        console.log(results);
+        
         res.status(200).json(results);
       });
     } catch (e) {

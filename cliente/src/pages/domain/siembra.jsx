@@ -36,7 +36,7 @@ export const Siembra = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resProductos = await fetch("http://localhost:3000/productos/get");
+                const resProductos = await fetch("http://localhost:3000/productos/get/select");
                 setProductos(await resProductos.json());
 
                 const resSemillas = await fetch("http://localhost:3000/tipo_semilla/get");
@@ -70,6 +70,16 @@ export const Siembra = () => {
         setSiembraActualizado(false)
     }, [siembraActualizada]);
 
+    const formatDate = (date) => {
+        if (!date) return null;  // Retorna null si la fecha es nula
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0'); // Agrega cero si es necesario
+        const day = String(d.getDate()).padStart(2, '0'); // Agrega cero si es necesario
+        return `${year}-${month}-${day}`;
+    };
+    
+
     const handleInputChange = (name, value) => {
         setFormData((prevData) => ({
             ...prevData,
@@ -79,13 +89,30 @@ export const Siembra = () => {
 
     const agregarSiembra = async () => {
         try {
-            await fetch("http://localhost:3000/post/siembra", {
+            // Formatea las fechas en el formato 'YYYY-MM-DD'
+            console.log(formData)
+            const formattedData = {
+                ...formData,
+                fechaSiembra: formatDate(formData.fechaSiembra),
+                fechaEstado: formatDate(formData.fechaEstado),
+                fechaRiego: formatDate(formData.fechaRiego),
+                estimacionCosechaFecha: formatDate(formData.estimacionCosechaFecha),
+            };
+    
+            const response = await fetch("http://localhost:3000/post/siembra/save", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
-            });
+                body: JSON.stringify(formattedData),
+            })
+    
+            if (!response.ok) {
+                throw new Error(`Error en la solicitud: ${response.status}`);
+            }
+    
+            const responseData = await response.text();
+            alert("Respuesta del servidor:", responseData);
+    
             setSiembraActualizado(true);
-            setShowForm(false);
             setFormData({
                 producto: "",
                 tipoSemilla: "",
@@ -102,26 +129,27 @@ export const Siembra = () => {
                 estimacionCosechaFecha: null,
             });
         } catch (error) {
-            console.error("Error submitting data:", error);
+            console.error("Error al enviar datos:", error);
         }
-        setSiembraActualizado(true)
-
+        setSiembraActualizado(true);
+        setShowForm(false);
     };
+    
 
     return (
         <div className="m-4 flex flex-col items-center pt-4">
             <div className="bg-gray-100 p-4 shadow-md w-full flex justify-between items-center">
                 <h2 className="text-3xl font-semibold text-green-700">Registro de Siembra</h2>
                 <button
-          className="bg-green-500 text-white py-2 px-6 rounded-full hover:bg-green-600 transition duration-300"
-          onClick={() => {
-            setShowForm(true)
+                    className="bg-green-500 text-white py-2 px-6 rounded-full hover:bg-green-600 transition duration-300"
+                    onClick={() => {
+                        setShowForm(true)
 
-          }}
-          hidden={showForm ? true : false}
-        >
-          Agregar
-        </button>
+                    }}
+                    hidden={showForm ? true : false}
+                >
+                    Agregar
+                </button>
             </div>
 
             {showForm && (
@@ -133,9 +161,10 @@ export const Siembra = () => {
                                     value={formData.producto}
                                     onChange={(value) => handleInputChange('producto', value)}
                                     placeholder="Seleccione un producto"
+
                                 >
                                     {productos.map((producto) => (
-                                        <Option key={producto.id} value={producto.id}>{producto.nombre}</Option>
+                                        <Option key={producto.id_codigo_barra} value={producto.id_codigo_barra}>{producto.nombre}</Option>
                                     ))}
                                 </Select>
                             </Form.Item>
@@ -146,7 +175,7 @@ export const Siembra = () => {
                                     placeholder="Seleccione un tipo de semilla"
                                 >
                                     {semillas.map((semilla) => (
-                                        <Option key={semilla.id} value={semilla.id}>{semilla.nombre}</Option>
+                                        <Option key={semilla.id_tipo_semilla} value={semilla.id_tipo_semilla}>{semilla.nombre_semilla}</Option>
                                     ))}
                                 </Select>
                             </Form.Item>
@@ -157,13 +186,18 @@ export const Siembra = () => {
                                     placeholder="Seleccione una marca de semilla"
                                 >
                                     {marcasSemillas.map((marca) => (
-                                        <Option key={marca.id} value={marca.id}>{marca.nombre}</Option>
+                                        <Option key={marca.id_marca_semilla} value={marca.id_marca_semilla}>{marca.nombre_marca}</Option>
                                     ))}
                                 </Select>
                             </Form.Item>
                             <Form.Item label="Cantidad de semillas usadas">
-                                <Input type="number" onChange={(value) => handleInputChange('cantidad', value)}
-                                    placeholder="Introduzca cantidad de semillas"></Input>
+                                <Input
+                                    type="number"
+                                    value={formData.cantidad}
+                                    onChange={(e) => handleInputChange('cantidad', e.target.value)}
+                                    placeholder="Introduzca cantidad de semillas"
+                                />
+
 
                             </Form.Item>
                             <Form.Item label="Fertilizante">
@@ -173,7 +207,7 @@ export const Siembra = () => {
                                     placeholder="Seleccione un fertilizante"
                                 >
                                     {fertilizantes.map((fertilizante) => (
-                                        <Option key={fertilizante.id} value={fertilizante.id}>{fertilizante.nombre}</Option>
+                                        <Option key={fertilizante.id_fertilizante} value={fertilizante.id_fertilizante}>{fertilizante.nombre_fertilizante}</Option>
                                     ))}
                                 </Select>
                             </Form.Item>
@@ -184,7 +218,7 @@ export const Siembra = () => {
                                     placeholder="Seleccione una marca de fertilizante"
                                 >
                                     {marcasFertilizantes.map((marca) => (
-                                        <Option key={marca.id} value={marca.id}>{marca.nombre}</Option>
+                                        <Option key={marca.id_marca_fertilizante} value={marca.id_marca_fertilizante}>{marca.nombre_marca}</Option>
                                     ))}
                                 </Select>
                             </Form.Item>
@@ -195,7 +229,7 @@ export const Siembra = () => {
                                     placeholder="Seleccione un estado"
                                 >
                                     {estados.map((estado) => (
-                                        <Option key={estado.id} value={estado.id}>{estado.nombre}</Option>
+                                        <Option key={estado.id_estado} value={estado.id_estado}>{estado.nombre_estado}</Option>
                                     ))}
                                 </Select>
                             </Form.Item>
@@ -206,7 +240,7 @@ export const Siembra = () => {
                                     placeholder="Seleccione un riego"
                                 >
                                     {riegos.map((riego) => (
-                                        <Option key={riego.id} value={riego.id}>{riego.nombre}</Option>
+                                        <Option key={riego.id_riego} value={riego.id_riego}>{riego.nombre_riego}</Option>
                                     ))}
                                 </Select>
                             </Form.Item>
@@ -232,8 +266,8 @@ export const Siembra = () => {
                                 />
                             </Form.Item>
                             <Form.Item label="Volumen de siembra en metros cuadrados">
-                                <Input type="number" onChange={(value) => handleInputChange('volumenSiembra', value)}
-                                    placeholder="Introduzca el volumen de siembra en mtrso cuadrados"></Input>
+                                <Input type="number" value={formData.volumenSiembra} onChange={(e) => handleInputChange('volumenSiembra', e.target.value)}
+                                    placeholder="Introduzca el volumen de siembra en metros cuadrados"></Input>
 
                             </Form.Item>
                             <Form.Item label="Estimación de Cosecha">
@@ -244,8 +278,30 @@ export const Siembra = () => {
                                 />
                             </Form.Item>
                             <Form.Item>
-                                <Button type="primary" htmlType="submit" style={{ width: '100%' }}>
+                                <Button ghost type="primary" htmlType="submit" style={{ width: '100%' }}>
                                     Guardar
+                                </Button>
+                            </Form.Item>
+                            <Form.Item>
+                                <Button danger type="primary" onClick={() => {
+                                    setShowForm(false);
+                                    setFormData({
+                                        producto: "",
+                                        tipoSemilla: "",
+                                        marcaSemilla: "",
+                                        cantidad: "",
+                                        fertilizante: "",
+                                        marcaFertilizante: "",
+                                        estado: "",
+                                        riego: "",
+                                        fechaSiembra: null,
+                                        fechaEstado: null,
+                                        fechaRiego: null,
+                                        volumenSiembra: "",
+                                        estimacionCosechaFecha: null,
+                                    });
+                                }} style={{ width: '100%' }}>
+                                    Cancelar
                                 </Button>
                             </Form.Item>
                         </Form>
@@ -253,7 +309,7 @@ export const Siembra = () => {
                 </div>
             )}
 
-            <div className="w-full mt-6 flex flex-wrap gap-4">
+            {!showForm && (<div className="w-full mt-6 flex flex-wrap gap-4">
                 {siembras.length > 0 ? (
                     siembras.map((siembra) => (
                         <SiembraCard key={siembra.id} siembra={siembra} />
@@ -261,235 +317,9 @@ export const Siembra = () => {
                 ) : (
                     <p>No hay siembras registradas.</p>
                 )}
-            </div>
+            </div>)}
         </div>
     );
 };
 
 export default Siembra;
-
-
-
-
-
-
-/*import "./Stockpag.css";
-import SiembraCard from '../Component/tarjetas/siembraCard'
-import { useState, useEffect } from "react";
-
-
-export const Siembra = () => {
-    const [showForm, setShowForm] = useState('')
-    const [productos, setProductos] = useState([])
-    const [semilla, setSemilla] = useState([])
-    const [fertilizante, setFertilizante] = useState([])
-    const [estado, setEstado] = useState([])
-    const [riego, setRiego] = useState([])
-    const [stockActializado, setStockActualizado] = useState(false)
-
-
-
-    useEffect(() => {
-
-
-        fetch('http://localhost:3000/productos/get')
-            .then(response => response.json())
-            .then(response => {
-                setProductos(response)
-                console.log(response)
-            })
-            .catch(error => { console.error(error) })
-
-
-
-
-        fetch('http://localhost:3000/productos/get/id')
-            .then(response => response.json())
-            .then(response => {
-                // Transforma el resultado en un array simple de IDs
-                const ids = response.map(item => item.id_codigo_barra);
-                setProductosid(ids);
-                console.log(ids);
-            })
-            .catch(error => { console.error(error) });
-
-            fetch('http://localhost:3000/tipo_semilla/get')
-            .then(response => response.json())
-            .then(response => {
-                setSemilla(response)
-                console.log(response)
-            })
-            .catch(error => { console.error(error) })
-
-        fetch('http://localhost:3000/fertilizantes/get')
-            .then(response => response.json())
-            .then(response => {
-                setFertilizante(response)
-                console.log(response)
-            })
-            .catch(error => { console.error(error) })
-
-        fetch('http://localhost:3000/estado/get')
-            .then(response => response.json())
-            .then(response => {
-                setEstado(response)
-                console.log(response)
-            })
-            .catch(error => { console.error(error) })
-
-        fetch('http://localhost:3000/riego/get')
-            .then(response => response.json())
-            .then(response => {
-                setRiego(response)
-                console.log(response)
-            })
-            .catch(error => { console.error(error) })
-
-
-        setStockActualizado(false)
-
-        
-
-    }, [stockActializado])
-
-    
-
-
-
-    const agregarSeimbra = () => {
-         if (estanteria < 1 && estanteria > numEstantes) {
-           alert(`Debes indicar un estante entre 1 y ${numEstantes} `)
-           return
-         }
-
-           if (!codigoProducto || !estanteria) {
-            alert('Todos los campos deben estar completados')
-            return
-        }
-        if (productosid.includes(parseInt(codigoProducto))) {
-
-             const now = new Date(); // trae la fecha y hora actual
-             const fecha = now.toISOString().split('T')[0]; // Fecha en formato YYYY-MM-DD
-             const hora = now.toTimeString().split(' ')[0]; // Hora en formato HH:MM:SS
-
-            const data = {
-                codigo: productos,
-                id_tipo_semillafk: parseInt(semilla),
-                cantidad: parseInt(cantidad),
-                fecha_siembra: fecha_siembra,//eelgir fecha
-                volumen_siembra: volumen_siembra,
-                id_marca_fertilizantefk: parseInt(fertilizante),
-                id_estado: parseInt(estado),
-                fecha_estado: fecha_estado,//elegir fecha
-                id_riegofk: parseInt(riego),
-                fecha_riego: fecha_riengo,//elegir fecha
-                estimacion_cosecha_fecha: fecha_cosecha//elegir fecha
-            };
-
-            console.log(data)
-
-
-            fetch('http://localhost:3000/post/siembra', {
-                 method: 'POST',
-                 headers: {
-                     'Content-Type': 'application/json',
-                 },
-                 body: JSON.stringify(data),
-             })
-                 .then(resp => {
-                     if (!resp.ok) {
-                         throw new Error(`HTTP error! status: ${resp.status}`);
-                     }
-                     return resp.text();
-                 })
-                 .then(respText => console.log(respText))
-                 .catch(error => console.error('Error:', error));
-             
-
-            setStockActualizado(true)
-            setCodigoProducto('');
-            setEstanteria('');
-            setShowForm(false)
-        }
-
-
-
-
-    }
-
-    return <>
-
-        <div className="m-4 flex flex-col items-center pt-4">
-            <div className="bg-gray-100 p-4 shadow-md w-full flex justify-between items-center">
-                <h2 className="text-3xl font-semibold text-green-700 text">Entrada de Stock!</h2>
-                <button
-                    className="bg-green-500 text-white py-2 px-6 rounded-full hover:bg-green-600 transition duration-300"
-                    onClick={() => {
-                        setShowForm(true)
-                        setCodigoProducto('');
-                        setEstanteria('');
-
-                    }}
-                    hidden={showForm ? true : false}
-                >
-                    Agregar
-                </button>
-            </div>
-            {showForm && (
-                <div className="flex flex-col items-center justify-center w-full mt-8">
-                    <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
-                        <form className="space-y-6 w-full">
-
-                            <div>
-                                <label htmlFor="codigoProducto" className="block text-sm font-medium text-gray-700 mb-1">
-                                    Codigo de producto:
-                                </label>
-                                <input
-                                    id="codigoProducto"
-                                    className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-500 sm:text-sm"
-                                    type="number"
-                                    required
-                                    value={codigoProducto}
-                                    onChange={(e) => setCodigoProducto(e.target.value)}
-
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="estanteria" className="block text-sm font-medium text-gray-700 mb-1">
-                                    Estanteria:
-                                </label>
-                                <input
-                                    id="estanteria"
-                                    className="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-500 sm:text-sm"
-                                    type="number"
-                                    required
-                                    value={estanteria}
-                                    onChange={(e) => setEstanteria(e.target.value)}
-
-                                />
-                            </div>
-                            <div className="flex justify-between mt-4">
-                                <button
-                                    className="bg-green-500 text-white py-2 px-4 rounded-full hover:bg-green-600 transition duration-300"
-                                    type="button"
-                                    onClick={agregarSeimbra}
-
-                                >
-                                    Agregar
-                                </button>
-                                <button
-                                    className="bg-gray-300 text-gray-700 py-2 px-4 rounded-full hover:bg-gray-400 transition duration-300"
-                                    type="button"
-                                    onClick={() => setShowForm(false)}
-                                >
-                                    Salir
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            )}
-        </div>
-
-    </>
-};*/ 

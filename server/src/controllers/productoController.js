@@ -45,55 +45,7 @@ module.exports.saveProduct = (req, res) => {
     }
 };
 
-/* PRUEBA PARA VER SI ELIMINA LA IMAGEN TEMPORAL
-const path = require('path');
-const connection = require('../models/db')
-const fs = require('fs')
 
-
-
-module.exports.saveProduct = (req, res) =>{
-    const { nombre } = req.body;
-    const avatar = req.file;
-    const {marca}=req.body;
-    const{codigoBarra}=req.body;
-    const data = fs.readFileSync(path.join(__dirname,'../imagenes/'+ req.file.filename))
-    aqui se lee la imagen para poder mandarla a la base de datos 
-    se usa el modulo fs(file system) y se guarda esa lectura en la 
-    contante data(que va a ser el imagen a guardar en la DB
-        la forma de LEER LA IMAGEN es fs(usa filesystem).readFileSync(
-            metodo que recibe la ubicacion exacta de la carpeta
-        )path(para declarar el camino(ruta del directorio).join(une el path)
-        (_dirname(variable global que devuelve la ubicacion de la carpeta donde es llamada)
-        ,../imagenes/(ubicacion de la carpeta)+ el nombre del archivo))
-    ) 
-    const consult = 'INSERT PRODUCTO (id_codigo_barra, nombre, avatar, marca, activo) values (?,?,?,?,?)';
-    try{
-        connection.query(consult,[codigoBarra,nombre,data,marca,1],(err,result)=>{
-            if(err){
-                console.error(err)
-                res.send(err);
-            }else {
-                console.log(result);
-                res.send('Operación exitosa');
-
-               /fs.unlinkSync(path.join(__dirname,'../imagenes/'+req.params.id+'-'+'reprise'+'-'+req.params.nombree+'-'+req.params.calidaa+'-producto.png'))
-                res.send('se borro su producto');
-            
-            
-
-        })
-    }catch (error) {
-        console.error(error);
-        res.send(error);
-    }
-
-
-}
------------------------------------------------------------------------------
-
-
-*/
 
 module.exports.getProducts =(req,res)=>{
     const consult = 'SELECT * FROM PRODUCTO WHERE activo = TRUE';
@@ -111,6 +63,27 @@ module.exports.getProducts =(req,res)=>{
 
                 console.log(nombreimagen);
                 res.json(nombreimagen);
+            }
+            
+
+        })
+    }catch (error) {
+        console.error(error);
+        res.send(error);
+    }
+
+
+}
+module.exports.getProductsSelect =(req,res)=>{
+    const consult = 'SELECT * FROM PRODUCTO WHERE activo = TRUE';
+    try{
+        connection.query(consult,(err,result)=>{
+            if(err){
+                console.error(err)
+                res.satatus(500).send(err);
+            }else {
+                
+                res.status(200).json(result);
             }
             
 

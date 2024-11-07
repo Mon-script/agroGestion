@@ -26,7 +26,7 @@ module.exports.login = (req, res) => {
 
                     // Firmar el token JWT
                     const token = jwt.sign({ username, role, id }, "Stack", {
-                        expiresIn: '3m' // El token expira en 3 minutos
+                        expiresIn: '20m' // El token expira en 3 minutos
                     });
 
                     res.send({ token });

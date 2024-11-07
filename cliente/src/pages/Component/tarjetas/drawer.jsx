@@ -43,7 +43,7 @@ const Draweter = ({ siembra }) => {
         extra={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
-            <Button type="primary" onClick={onClose}>OK</Button>
+            <Button ghost type="primary" onClick={onClose}>OK</Button>
           </Space>
         }
       >
