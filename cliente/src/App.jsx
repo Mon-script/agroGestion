@@ -15,6 +15,7 @@ import RegistroUsuario from './pages/Component/formulario/FormularioDeRegistro'
 import { UserProvider } from './userContext';
 import Siembra from './pages/domain/siembra';
 import { MaterialProvider } from './materialContext';
+import { Cosechas } from './pages/domain/cosecha';
 
 
 
@@ -32,6 +33,7 @@ function App() {
             <Route element={<Root />}>
               <Route index element={<Home />} />
               <Route path='/siembra' element={<Siembra />} />
+              <Route path='/cosecha' element={<Cosechas />} />
               <Route path='/producto' element={<Producto />} />
               <Route path='/stock' element={<Stock />} />
               <Route path='/entrada' element={<Entrada />} />

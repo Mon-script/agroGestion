@@ -189,7 +189,7 @@ module.exports.postSiembra = (req, res) => {
 };
 
 module.exports.putSiembra = (req, res) => {
-  const { id_siembra } = req.params;
+  
 
   const {
     producto,
@@ -205,6 +205,7 @@ module.exports.putSiembra = (req, res) => {
     fechaSiembra,
     volumenSiembra,
     estimacionCosechaFecha,
+    id_siembra
   } = req.body;
 
   const consult = `UPDATE SIEMBRA SET 

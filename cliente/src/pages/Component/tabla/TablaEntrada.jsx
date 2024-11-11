@@ -4,6 +4,7 @@ import { FechayHora } from '../DatePicker';
 import { ExcelExporter } from "../botones/exportExelBoton";
 import react,{useState, useEffect} from'react'
 import { format } from 'date-fns';
+import logo from '../../../assets/2.png'
 
 
 export const TablaEntrada = ( ) => {
@@ -48,7 +49,7 @@ export const TablaEntrada = ( ) => {
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2">
-                    <Avatar shape="circle" img={item.avatar} size="md" />
+                    <Avatar shape="circle" img={logo} size="md" />
                     <div>
                       <p className="-mb-0.5 text-body-4 font-medium text-metal-600">{item.producto_nombre}</p>
                       <p className="-mb-0.5 text-body-4 font-medium text-metal-600">{item.id_codigo_barra}</p>

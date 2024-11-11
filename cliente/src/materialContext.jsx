@@ -49,7 +49,7 @@ export const MaterialProvider = ({children}) => {
                 setEmpaques(await resEmpaques.json());
 
 
-                setSiembraActualizado(false);
+                setActualizarMateriales(false);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }

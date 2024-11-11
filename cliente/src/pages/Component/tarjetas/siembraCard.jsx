@@ -9,7 +9,7 @@ import fondo from '../../../assets/2.png';
 const { Meta } = Card;
 
 const SiembraCard = ({ siembra }) => {
-  const { nombre_producto, fecha_siembra, estado } = siembra;
+  const { nombre_producto, fecha_siembra, estado, actualizarSiembra } = siembra;
 
   return (
     <>
@@ -33,8 +33,8 @@ const SiembraCard = ({ siembra }) => {
           />
         }
         actions={[
-          <Smodal siembraId={siembra.id_siembra}/>,
-          <Draweter siembra={siembra} key="edit" />,
+          <Smodal siembra={siembra} />,
+          <Draweter siembra={siembra} actualizarSiembra={actualizarSiembra} key="edit" />,
         ]}
       >
         <Meta

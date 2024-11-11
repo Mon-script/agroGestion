@@ -16,20 +16,22 @@ export const SidebarComponent = () => {
 
   const menuItemsAd = [
     { id: 0, nombre: 'Siembras', ruta: '/siembra', icono: <SunOutlined size={32} color="#7376a0" /> },
-    { id: 1, nombre: 'Productos', ruta: '/producto', icono: <StarOutlined size={32} color="#7376a0" /> },
-    { id: 2, nombre: 'Stock', ruta: '/stock', icono: <ShopOutlined size={32} color="#0715cf" /> },
-    { id: 3, nombre: 'Entradas', ruta: '/entrada', icono: <RubyOutlined size={32} color="#0adb23" /> },
-    { id: 4, nombre: 'Salidas', ruta: '/salida', icono: <TruckOutlined size={32} color="#db0a0a" /> },
-    { id: 5, nombre: 'Registro', ruta: '/registro', icono: <UserAddOutlined size={32} color="#db0a0a" /> },
-    { id: 6, nombre: 'Personal', ruta: '/personal', icono: <TeamOutlined size={32} color="#db0a0a" /> },
+    { id: 1, nombre: 'Cosechas', ruta: '/cosecha', icono: <MoonOutlined size={32} color="#7376a0" /> },
+    { id: 2, nombre: 'Productos', ruta: '/producto', icono: <StarOutlined size={32} color="#7376a0" /> },
+    { id: 3, nombre: 'Stock', ruta: '/stock', icono: <ShopOutlined size={32} color="#0715cf" /> },
+    { id: 4, nombre: 'Entradas', ruta: '/entrada', icono: <RubyOutlined size={32} color="#0adb23" /> },
+    { id: 5, nombre: 'Salidas', ruta: '/salida', icono: <TruckOutlined size={32} color="#db0a0a" /> },
+    { id: 6, nombre: 'Registro', ruta: '/registro', icono: <UserAddOutlined size={32} color="#db0a0a" /> },
+    { id: 7, nombre: 'Personal', ruta: '/personal', icono: <TeamOutlined size={32} color="#db0a0a" /> },
   ];
 
   const menuItems = [
     { id: 0, nombre: 'Siembras', ruta: '/siembra', icono: <SunOutlined size={32} color="#7376a0" /> },
-    { id: 1, nombre: 'Productos', ruta: '/producto', icono: <StarOutlined size={32} color="#7376a0" /> },
-    { id: 2, nombre: 'Stock', ruta: '/stock', icono: <ShopOutlined size={32} color="#0715cf" /> },
-    { id: 3, nombre: 'Entradas', ruta: '/entrada', icono: <RubyOutlined size={32} color="#0adb23" /> },
-    { id: 4, nombre: 'Salidas', ruta: '/salida', icono: <TruckOutlined size={32} color="#db0a0a" /> },
+    { id: 1, nombre: 'Cosechas', ruta: '/cosecha', icono: <MoonOutlined size={32} color="#7376a0" /> },
+    { id: 2, nombre: 'Productos', ruta: '/producto', icono: <StarOutlined size={32} color="#7376a0" /> },
+    { id: 3, nombre: 'Stock', ruta: '/stock', icono: <ShopOutlined size={32} color="#0715cf" /> },
+    { id: 4, nombre: 'Entradas', ruta: '/entrada', icono: <RubyOutlined size={32} color="#0adb23" /> },
+    { id: 5, nombre: 'Salidas', ruta: '/salida', icono: <TruckOutlined size={32} color="#db0a0a" /> },
   ];
 
   return (

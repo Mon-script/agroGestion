@@ -4,7 +4,7 @@ import { Card, Select, Input, Button, DatePicker, Form } from "antd";
 
 const { Option } = Select;
 
-export const SiembraDrawerForm = ({ editar }) => {
+export const SiembraDrawerForm = ({ editar,id_siembra }) => {
     const [productos, setProductos] = useState([]);
     const [semillas, setSemillas] = useState([]);
     const [marcasSemillas, setMarcasSemillas] = useState([]);
@@ -27,6 +27,7 @@ export const SiembraDrawerForm = ({ editar }) => {
         fechaRiego: null,
         volumenSiembra: "",
         estimacionCosechaFecha: null,
+        id_siembra:id_siembra,
     });
 
     useEffect(() => {
@@ -91,8 +92,8 @@ export const SiembraDrawerForm = ({ editar }) => {
                 estimacionCosechaFecha: formatDate(formData.estimacionCosechaFecha),
             };
 
-            const response = await fetch("http://localhost:3000/post/siembra/save", {
-                method: "POST",
+            const response = await fetch("http://localhost:3000/siembra/update", {
+                method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formattedData),
             })

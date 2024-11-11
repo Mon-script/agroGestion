@@ -312,7 +312,7 @@ export const Siembra = () => {
             {!showForm && (<div className="w-full mt-6 flex flex-wrap gap-4">
                 {siembras.length > 0 ? (
                     siembras.map((siembra) => (
-                        <SiembraCard key={siembra.id} siembra={siembra} />
+                        <SiembraCard key={siembra.id} siembra={siembra} actualizarSiembra={setSiembraActualizado} />
                     ))
                 ) : (
                     <p>No hay siembras registradas.</p>

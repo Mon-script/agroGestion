@@ -4,7 +4,7 @@ import { EllipsisOutlined } from '@ant-design/icons';
 import logo from '../../../assets/Culturismo-Vegano-y-vegetariano-Etenon-1024x878.jpg';
 import { SiembraDrawerForm } from '../formulario/siembraFormDrawer';
 
-const Draweter = ({ siembra }) => {
+const Draweter = ({ siembra, actualizarSiembra }) => {
   const [open, setOpen] = useState(false);
   const [size, setSize] = useState();
   const [editando, setEditando] = useState(false);
@@ -22,7 +22,8 @@ const Draweter = ({ siembra }) => {
     fecha_riego,
     fecha_siembra,
     volumen_siembra,
-    estimacion_cosecha
+    estimacion_cosecha,
+    id_siembra
   } = siembra;
   function formatFecha(fecha) {
   
@@ -113,7 +114,7 @@ const Draweter = ({ siembra }) => {
             </h2>
           </div>
         ) : (
-          <SiembraDrawerForm editar = {setEditando} />
+          <SiembraDrawerForm editar = {setEditando} id_siembra={id_siembra} actualizarSiembra={actualizarSiembra} />
         )}
       </Drawer>
     </>

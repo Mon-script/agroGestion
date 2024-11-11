@@ -4,7 +4,7 @@ import { EditOutlined, EllipsisOutlined, SendOutlined } from '@ant-design/icons'
 import { CosechaModalForm } from '../formulario/cosechaFormModal';
 
 
-const Smodal = ({siembraId}) => {
+const Smodal = ({siembra}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -20,14 +20,14 @@ const Smodal = ({siembraId}) => {
       <Button danger type="primary" onClick={showModal}>
       <SendOutlined/>Cosechar
       </Button>
-      <Modal title="Cosechar" open={isModalOpen} onCancel={handleCancel}
+      <Modal title="Cosechar" centered open={isModalOpen} onCancel={handleCancel}
       footer={[
         <Button>Cosechar</Button>,
         <Button danger type='primary' onClick={handleCancel}>Cancelar</Button>
       ]
       } >
         <h2>Para cosechar debe rellenar los datos faltantes de cosecha</h2>
-        <CosechaModalForm siembraId={siembraId}/>
+        <CosechaModalForm siembra={siembra}/>
       </Modal>
     </>
   );

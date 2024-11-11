@@ -1,30 +1,41 @@
-import React,{useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import { Card, Select, Input, Button, DatePicker, Form } from "antd";
 import { MaterialContext } from "../../../materialContext";
 
-
-
 const { Option } = Select;
 
-export const  CosechaModalForm = ({siembraId}) =>{
+export const CosechaModalForm = ({siembra, actualizarSiembra}) => {
+    const {empaques} = useContext(MaterialContext);
 
-    const {productos, empaques} = useContext(MaterialContext);
-    console.log(productos,empaques)
+    const {
+        id_siembra,
+        nombre_producto,
+        cantidad
+      } = siembra;
+      console.log(cantidad)
 
     const [formData, setFormData] = useState({
-        id_siembra: siembraId,
-        producto: "",
+        id_siembra: id_siembra,
+        producto: nombre_producto,
         rendimientoCosecha: "",
         cantidadCosecha: "",
         empaque: "",
         fechaCosecha: null,
-        
     });
+    console.log(formData)
 
-    
+    // Calcula el rendimiento de cosecha en porcentaje
+    const calcularRendimiento = (cantidadCosechada) => {
+        if (cantidad > 0) {
+            const rendimiento = (cantidadCosechada / cantidad) * 100;
+            return rendimiento.toFixed(2); // Redondea a 2 decimales
+        }
+        return 0;
+    };
 
+    // Función para formatear la fecha
     const formatDate = (date) => {
-        if (!date) return null;  // Retorna null si la fecha es nula
+        if (!date) return null; // Retorna null si la fecha es nula
         const d = new Date(date);
         const year = d.getFullYear();
         const month = String(d.getMonth() + 1).padStart(2, '0'); // Agrega cero si es necesario
@@ -32,98 +43,94 @@ export const  CosechaModalForm = ({siembraId}) =>{
         return `${year}-${month}-${day}`;
     };
 
-
     const handleInputChange = (name, value) => {
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
+        setFormData((prevData) => {
+            // Si la cantidad de cosecha cambia, actualiza el rendimiento
+            if (name === "cantidadCosecha") {
+                const rendimiento = calcularRendimiento(value);
+                return {
+                    ...prevData,
+                    [name]: value,
+                    rendimientoCosecha: rendimiento, // Actualiza el rendimiento calculado
+                };
+            }
+            return {
+                ...prevData,
+                [name]: value,
+            };
+        });
     };
 
-    
     const manejarCosecha = async () => {
         try {
-            // Formatea las fechas en el formato 'YYYY-MM-DD'
-            console.log(formData)
+            // Formatea las fechas antes de enviarlas
             const formattedData = {
                 ...formData,
-                fechaCosecha: formatDate(formData.fechaSiembra),
-                
+                fechaCosecha: formatDate(formData.fechaCosecha),
             };
-    
+
             const response = await fetch("http://localhost:3000/post/cosecha/save", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formattedData),
-            })
-    
+            });
+
             if (!response.ok) {
                 throw new Error(`Error en la solicitud: ${response.status}`);
             }
-    
+
             const responseData = await response.text();
             alert("Respuesta del servidor:", responseData);
-    
-    
+
             setFormData({
                 producto: "",
                 rendimientoCosecha: "",
                 cantidadCosecha: "",
                 empaque: "",
-                fechaCosecha: "",
+                fechaCosecha: null,
             });
+            actualizarSiembra(true)
         } catch (error) {
             console.error("Error al enviar datos:", error);
         }
-    
-        
     };
+
     return (
         <div className="m-4 flex flex-col items-center pt-4">
-            <h2 className="text-3xl font-semibold text-white-600 text-center mb-12 bg-gray-100 rounded-lg shadow-lg p-6" style={{ backgroundColor: 'rgba(20, 90, 20, 0.6)' }}>
-            Edicion de Siembra
-            </h2>
-
-            <div className="flex flex-col items-center justify-center w-full mt-8">
+           <div className="flex flex-col items-center justify-center w-full mt-8">
                 <Card title="Datos para cosecha" style={{ width: '100%', maxWidth: '600px' }}>
                     <Form layout="vertical" onFinish={manejarCosecha} className="space-y-6">
-                        <Form.Item label="Producto">
-                            <Select
-                                value={formData.producto}
-                                onChange={(value) => handleInputChange('producto', value)}
-                                placeholder="Seleccione un producto"
+                       
 
-                            >
-                                {productos.map((producto) => (
-                                    <Option key={producto.id_codigo_barra} value={producto.id_codigo_barra}>{producto.nombre}</Option>
-                                ))}
-                            </Select>
-                        </Form.Item>
-                        
-                        
                         <Form.Item label="Cantidad Cosechada">
                             <Input
                                 type="number"
                                 value={formData.cantidadCosecha}
                                 onChange={(e) => handleInputChange('cantidadCosecha', e.target.value)}
-                                placeholder="Introduzca cantidad de semillas"
+                                placeholder="Introduzca cantidad cosechada"
                             />
-
-
                         </Form.Item>
+
+                        <Form.Item label="Rendimiento de la Cosecha (%)">
+                            <Input
+                                value={formData.rendimientoCosecha}
+                                readOnly
+                                placeholder="El rendimiento se calculará automáticamente"
+                            />
+                        </Form.Item>
+
                         <Form.Item label="Empaque">
                             <Select
                                 value={formData.empaque}
                                 onChange={(value) => handleInputChange('empaque', value)}
-                                placeholder="Seleccione un producto"
-
+                                placeholder="Seleccione un empaque"
                             >
                                 {empaques.map((producto) => (
                                     <Option key={producto.id_empaque} value={producto.nombre_empaque}>{producto.nombre_empaque}</Option>
                                 ))}
                             </Select>
                         </Form.Item>
-                        
+
                         <Form.Item label="Fecha de Cosecha">
                             <DatePicker
                                 value={formData.fechaCosecha}
@@ -137,6 +144,7 @@ export const  CosechaModalForm = ({siembraId}) =>{
                                 Guardar
                             </Button>
                         </Form.Item>
+
                         <Form.Item>
                             <Button danger type="primary" onClick={() => {
                                 setFormData({
@@ -153,10 +161,8 @@ export const  CosechaModalForm = ({siembraId}) =>{
                     </Form>
                 </Card>
             </div>
-
-
         </div>
     );
+};
 
-}
 
