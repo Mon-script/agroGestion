@@ -119,7 +119,7 @@ export const  CosechaModalForm = ({siembraId}) =>{
 
                             >
                                 {empaques.map((producto) => (
-                                    <Option key={producto.id_codigo_barra} value={producto.id_codigo_barra}>{producto.nombre_empaque}</Option>
+                                    <Option key={producto.id_empaque} value={producto.nombre_empaque}>{producto.nombre_empaque}</Option>
                                 ))}
                             </Select>
                         </Form.Item>

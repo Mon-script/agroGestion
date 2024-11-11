@@ -46,7 +46,7 @@ export const MaterialProvider = ({children}) => {
                 setSiembras(await resSiembras.json());
 
                 const resEmpaques = await fetch("http://localhost:3000/empaque/get");
-                setEmpaques(await resProductos.json());
+                setEmpaques(await resEmpaques.json());
 
 
                 setSiembraActualizado(false);
