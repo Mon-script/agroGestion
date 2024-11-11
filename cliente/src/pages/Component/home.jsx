@@ -1,5 +1,5 @@
 import React from 'react';
-import agriculturalog from '../../assets/fresas-cultivos-berries.jpg'
+import agriculturalog from '../../assets/frutas-verduras-temporada-marzo-scaled.webp'
 import agriculturalogon from '../../assets/1.png'
 const Home = () => {
   return (

@@ -107,9 +107,9 @@ export const Producto = () => {
       let imageninfo = imagenActual.split('-');
       let id = parseInt(imageninfo[0]);
       let nombree = imageninfo[1];
-      let marcaa = imageninfo[2];
+      let calidaa = imageninfo[2];
 
-      fetch('http://localhost:3000/producto/delete/' + id +'/'+ nombree +'/'+ marcaa, {
+      fetch('http://localhost:3000/producto/delete/' + id +'/'+ nombree +'/'+ calidaa, {
         method: 'DELETE'
       })
         .then(resp => resp.text())
@@ -128,6 +128,7 @@ export const Producto = () => {
     let id = imageninfo[0];
     let nombree = imageninfo[1];
     let calidaa = imageninfo[2];
+    console.log(imagenActual)
     console.log(nombree,calidaa)
     setCalidadActual(calidaa)
     setNombreActual(nombree)

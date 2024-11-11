@@ -56,7 +56,7 @@ module.exports.getProducts =(req,res)=>{
                 res.send(err);
             }else {
                 result.map(producto=>{
-                    fs.writeFileSync(path.join(__dirname,'../dbImagenes/'+ producto.id_codigo_barra+'-'+producto.nombre+'-'+producto.marca+'-producto.png'),producto.avatar)
+                    fs.writeFileSync(path.join(__dirname,'../dbImagenes/'+ producto.id_codigo_barra+'-'+producto.nombre+'-'+producto.calidad+'-producto.png'),producto.avatar)
                 })
 
                 const nombreimagen= fs.readdirSync(path.join(__dirname,'../dbImagenes'))

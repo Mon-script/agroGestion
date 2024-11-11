@@ -1,4 +1,4 @@
-import { Avatar, Badge, Popover, Table } from 'keep-react';
+import { Avatar, Badge, Button, Popover, Table } from 'keep-react';
 import { Crown, DotsThreeOutline, Trash } from 'phosphor-react';
 import { FechayHora } from "../DatePicker";
 import { ExcelExporter } from "../botones/exportExelBoton";

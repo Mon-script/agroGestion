@@ -33,12 +33,10 @@ export const TablaEntrada = ( ) => {
       <Table.Caption>
         <div className="my-5 flex items-center justify-between px-6">
           <div className="flex items-center gap-5">
-            <p className="text-body-1 font-semibold text-metal-600">Entrada-Stock</p>
+            <p className="text-body-1 font-semibold text-metal-600">Entradas-Stock</p>
           </div>
           <div className="flex items-center gap-5">
-            {/* Aquí va el botón */}
             <ExcelExporter data={dataArray} fileName="table_data" />
-            {/* Aquí termina el espacio del botón */}
             <FechayHora />
           </div>
         </div>

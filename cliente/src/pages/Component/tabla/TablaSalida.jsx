@@ -61,7 +61,7 @@ export const TablaSalida = () => {
       <Table.Caption>
         <div className="my-5 flex items-center justify-between px-6">
           <div className="flex items-center gap-5">
-            <p className="text-body-1 font-semibold text-metal-600">Salida</p>
+            <p className="text-body-1 font-semibold text-metal-600">Salidas</p>
           </div>
           <div className="flex items-center gap-5">
             <ExcelExporter data={dataArray} fileName="table_data" />

@@ -14,6 +14,7 @@ import { Salida } from './pages/domain/salida';
 import RegistroUsuario from './pages/Component/formulario/FormularioDeRegistro'
 import { UserProvider } from './userContext';
 import Siembra from './pages/domain/siembra';
+import { MaterialProvider } from './materialContext';
 
 
 
@@ -22,7 +23,9 @@ function App() {
 
 
   return (
+    
     <UserProvider>
+      <MaterialProvider>
       <Router>
         <Routes>
           <Route element={<RutasProtegidas />}>
@@ -42,6 +45,7 @@ function App() {
 
         </Routes>
       </Router>
+      </MaterialProvider>
     </UserProvider>
   );
 

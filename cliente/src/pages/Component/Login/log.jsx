@@ -58,7 +58,7 @@ const Login1 = () => {
             <div className='wrapper'>
                 <div className='form-box login'>
                     <form action="">
-                        <h1>Login</h1>
+                        <h1>Acceso</h1>
                         <div className="input-box">
                             <input onChange={(e) => { setUsername(e.target.value) }} type="text" placeholder='Usuario' required /><FaUser className='icon' />
                         </div>
