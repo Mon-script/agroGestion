@@ -5,6 +5,7 @@ import { ExcelExporter } from "../botones/exportExelBoton";
 import { FechayHora } from "../DatePicker";
 import { Crown, DotsThreeOutline, Trash } from 'phosphor-react';
 import { UserContext } from '../../../userContext';
+import logo from '../../../assets/avatar.jpeg'
 
 export const TablaSalida = () => {
   const [dataArray, setData] = useState([]);
@@ -57,7 +58,7 @@ export const TablaSalida = () => {
   }, []);
 
   return (
-    <Table showCheckbox={true}>
+    <Table showCheckbox={false}>
       <Table.Caption>
         <div className="my-5 flex items-center justify-between px-6">
           <div className="flex items-center gap-5">
@@ -74,7 +75,7 @@ export const TablaSalida = () => {
           <Table.Row className="bg-white" key={index}>
             <Table.Cell>
               <div className="flex items-center gap-3">
-                <Avatar shape="circle" img={item.avatar} size="md" />
+                <Avatar shape="circle" img={logo} size="md" />
                 <div>
                   <p className="text-body-4 font-medium text-metal-600">{item.producto_nombre}</p>
                   <p className="text-body-4 font-medium text-metal-600">{item.id_codigo_barra}</p>

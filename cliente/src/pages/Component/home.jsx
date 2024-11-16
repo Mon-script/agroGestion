@@ -1,6 +1,6 @@
 import React from 'react';
 import agriculturalog from '../../assets/frutas-verduras-temporada-marzo-scaled.webp'
-import agriculturalogon from '../../assets/1.png'
+import agriculturalogon from '../../assets/frutayverdurona.webp'
 const Home = () => {
   return (
     <div className="flex flex-col min-h-screen bg-green-600">

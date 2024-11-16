@@ -6,7 +6,7 @@ import { UserContext } from '../../userContext';
 import { Button, message, Popconfirm } from 'antd';
 import { FechayHora } from '../Component/DatePicker';
 import { ExcelExporter } from '../Component/botones/exportExelBoton';
-import logo from '../../assets/1.png'
+import logo from '../../assets/avatar.jpeg'
 
 export const Cosechas = () => {
   const [dataArray, setData] = useState([]);
@@ -54,7 +54,7 @@ INNER JOIN
 
 
   return (
-    <Table showCheckbox={true}>
+    <Table showCheckbox={false}>
       <Table.Caption>
         <div className="my-5 flex items-center justify-between px-6">
           <div className="flex items-center gap-5">

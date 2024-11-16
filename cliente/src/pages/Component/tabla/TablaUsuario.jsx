@@ -52,7 +52,7 @@ export const TablaUsuario = () => {
   }
 
   return (
-    <Table showCheckbox={true}>
+    <Table showCheckbox={false}>
       <Table.Caption>
         <div className="my-5 flex items-center justify-between px-6">
           <div className="flex items-center gap-5">

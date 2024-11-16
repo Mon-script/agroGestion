@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Stockpag.css";
 import SiembraCard from "../Component/tarjetas/siembraCard";
-import { Card, Select, Input, Button, DatePicker, Form } from "antd";
+import { Card, Select, Input, Button, DatePicker, Form, message } from "antd";
 
 const { Option } = Select;
 
@@ -106,11 +106,16 @@ export const Siembra = () => {
             })
     
             if (!response.ok) {
+                message.danger(`Algo salio mal: ${response.status}`)
                 throw new Error(`Error en la solicitud: ${response.status}`);
             }
+            if (response.ok){
+                message.success("Operacion exitosa")
+            }
+
     
             const responseData = await response.text();
-            alert("Respuesta del servidor:", responseData);
+            
     
             setSiembraActualizado(true);
             setFormData({

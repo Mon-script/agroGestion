@@ -19,7 +19,7 @@ const { getTipoSemilla } = require('../controllers/tipoSemillaController');
 const { getMarcaSemillas } = require('../controllers/marcaSemillaController');
 const { getSiembraActivas, postSiembra, putSiembra } = require('../controllers/siembraController');
 const { getEmpaque } = require('../controllers/empaqueController');
-const { getCosecha } = require('../controllers/cosechaController');
+const { getCosecha, registrarCosecha } = require('../controllers/cosechaController');
 
 const almacenamientoTemporal= multer.diskStorage({
     destination: path.join(__dirname,'../imagenes'),//dirnaame es una variable global
@@ -64,6 +64,7 @@ router.post('/saveProduct',avatarSubir, saveProduct);
 router.post('/post/entrada', postEntrada);
 router.post('/postEntredaSalida', postEntredaSalida);
 router.post('/post/siembra/save', postSiembra);
+router.post('/post/cosecha/save', registrarCosecha)
 
 router.put('/reintegrarUsuario/:id', reintegroUsuario)
 router.put('/siembra/update', putSiembra)

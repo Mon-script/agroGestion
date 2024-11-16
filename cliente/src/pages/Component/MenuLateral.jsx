@@ -1,7 +1,7 @@
 import { Sidebar } from "keep-react";
-import { TeamOutlined, UserAddOutlined, CloseCircleFilled, SunOutlined, TruckOutlined, StarOutlined, ShopOutlined, MoonOutlined, RubyOutlined} from '@ant-design/icons';
+import { TeamOutlined, UserAddOutlined, CloseCircleFilled, SunOutlined, TruckOutlined, StarOutlined, ShopOutlined, MoonOutlined, RubyOutlined } from '@ant-design/icons';
 import { NavLink } from "react-router-dom";
-import logo from '../../assets/2.png';
+import logo from '../../assets/WhatsApp Image 2024-11-11 at 16.08.54.jpeg';
 import React, { useContext } from 'react';
 import { UserContext } from '../../userContext';
 
@@ -45,10 +45,17 @@ export const SidebarComponent = () => {
             </Sidebar.Item>
           ))}
           <Sidebar.Item icon={<CloseCircleFilled />} style={{ marginTop: '4vh', padding: '2vw' }}>
-            <button onClick={logOut} style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer' }}>
+            <button
+              onClick={() => {
+                logOut(); // Llama a tu función de cierre de sesión
+                window.location.href = 'http://localhost:6969/'; // Redirige a la URL base
+              }}
+              style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer' }}
+            >
               Cerrar sesión
             </button>
           </Sidebar.Item>
+
 
         </Sidebar.ItemGroup>
       </Sidebar.Items>

@@ -1,28 +1,28 @@
 import React, { useState, useContext } from "react";
-import { Card, Select, Input, Button, DatePicker, Form } from "antd";
+import { Card, Select, Input, Button, DatePicker, Form, message } from "antd";
 import { MaterialContext } from "../../../materialContext";
 
 const { Option } = Select;
 
-export const CosechaModalForm = ({siembra, actualizarSiembra}) => {
+export const CosechaModalForm = ({siembra, actualizarSiembra,cerrarModal}) => {
     const {empaques} = useContext(MaterialContext);
 
     const {
         id_siembra,
-        nombre_producto,
+        id_codigo_barrafk,
         cantidad
       } = siembra;
       console.log(cantidad)
 
     const [formData, setFormData] = useState({
-        id_siembra: id_siembra,
-        producto: nombre_producto,
+        id_siembra: "",
+        producto: "",
         rendimientoCosecha: "",
         cantidadCosecha: "",
         empaque: "",
         fechaCosecha: null,
     });
-    console.log(formData)
+    
 
     // Calcula el rendimiento de cosecha en porcentaje
     const calcularRendimiento = (cantidadCosechada) => {
@@ -51,7 +51,8 @@ export const CosechaModalForm = ({siembra, actualizarSiembra}) => {
                 return {
                     ...prevData,
                     [name]: value,
-                    rendimientoCosecha: rendimiento, // Actualiza el rendimiento calculado
+                    rendimientoCosecha: rendimiento,
+                     // Actualiza el rendimiento calculado
                 };
             }
             return {
@@ -67,7 +68,11 @@ export const CosechaModalForm = ({siembra, actualizarSiembra}) => {
             const formattedData = {
                 ...formData,
                 fechaCosecha: formatDate(formData.fechaCosecha),
+                id_siembra: id_siembra,
+                producto: id_codigo_barrafk,
             };
+
+            console.log(formattedData)
 
             const response = await fetch("http://localhost:3000/post/cosecha/save", {
                 method: "POST",
@@ -76,11 +81,15 @@ export const CosechaModalForm = ({siembra, actualizarSiembra}) => {
             });
 
             if (!response.ok) {
+                message.danger(`Algo salio mal: ${response.status}`)
                 throw new Error(`Error en la solicitud: ${response.status}`);
+            }
+            if (response.ok){
+                message.success("Operacion exitosa")
             }
 
             const responseData = await response.text();
-            alert("Respuesta del servidor:", responseData);
+            
 
             setFormData({
                 producto: "",
@@ -90,6 +99,7 @@ export const CosechaModalForm = ({siembra, actualizarSiembra}) => {
                 fechaCosecha: null,
             });
             actualizarSiembra(true)
+            cerrarModal()
         } catch (error) {
             console.error("Error al enviar datos:", error);
         }
@@ -125,8 +135,8 @@ export const CosechaModalForm = ({siembra, actualizarSiembra}) => {
                                 onChange={(value) => handleInputChange('empaque', value)}
                                 placeholder="Seleccione un empaque"
                             >
-                                {empaques.map((producto) => (
-                                    <Option key={producto.id_empaque} value={producto.nombre_empaque}>{producto.nombre_empaque}</Option>
+                                {empaques.map((empaque) => (
+                                    <Option key={empaque.id_empaque} value={empaque.id_empaque}>{empaque.nombre_empaque}</Option>
                                 ))}
                             </Select>
                         </Form.Item>
@@ -154,6 +164,7 @@ export const CosechaModalForm = ({siembra, actualizarSiembra}) => {
                                     empaque: "",
                                     fechaCosecha: null,
                                 });
+                                cerrarModal()
                             }} style={{ width: '100%' }}>
                                 Cancelar
                             </Button>

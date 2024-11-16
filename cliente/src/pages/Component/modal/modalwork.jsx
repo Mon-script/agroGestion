@@ -21,13 +21,9 @@ const Smodal = ({siembra}) => {
       <SendOutlined/>Cosechar
       </Button>
       <Modal title="Cosechar" centered open={isModalOpen} onCancel={handleCancel}
-      footer={[
-        <Button>Cosechar</Button>,
-        <Button danger type='primary' onClick={handleCancel}>Cancelar</Button>
-      ]
-      } >
+      footer={null} >
         <h2>Para cosechar debe rellenar los datos faltantes de cosecha</h2>
-        <CosechaModalForm siembra={siembra}/>
+        <CosechaModalForm siembra={siembra} cerrarModal={handleCancel}/>
       </Modal>
     </>
   );
