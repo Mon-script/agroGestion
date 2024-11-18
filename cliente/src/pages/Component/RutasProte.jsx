@@ -11,9 +11,6 @@ function RutasProtegidas() {
         return <Login1 />;
     }
 
-    // Puedes usar user.role para comprobar el rol del usuario
-    // Aquí simplemente estamos asegurándonos de que el usuario esté autenticado
-
     return <Outlet />;
 }
 

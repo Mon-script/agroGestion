@@ -11,6 +11,7 @@ export const SidebarComponent = () => {
   const logOut = () => {
     localStorage.removeItem('token');
     setUser(null);
+    window.location.href = 'http://localhost:6969/';
   }
 
 
@@ -47,8 +48,7 @@ export const SidebarComponent = () => {
           <Sidebar.Item icon={<CloseCircleFilled />} style={{ marginTop: '4vh', padding: '2vw' }}>
             <button
               onClick={() => {
-                logOut(); // Llama a tu función de cierre de sesión
-                window.location.href = 'http://localhost:6969/'; // Redirige a la URL base
+                logOut()
               }}
               style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer' }}
             >

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './TarjetaProducto.css';
-import Logo from '../img/Logo.jpg';
 import CodigodeBarras2 from '../codigodebarra/CodigodeBarras2';
 
 const TarjetaProducto = ({ producto }) => {
