@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { MaterialContext } from '../../userContext';
 import { Tabs } from 'antd';
 import EmpaqueForm from '../Component/formulario/materialForms/empaquetado';
 import EstadoForm from '../Component/formulario/materialForms/estado';
@@ -44,5 +45,10 @@ const items = [
   },
 ];
 
-const MaterialesPanel = () => <Tabs defaultActiveKey="1" items={items} onChange={onChange} />;
+const MaterialesPanel = () =>{ 
+  const { semillas, marcasSemillas,fertilizantes,marcasFertilizantes, estados, riegos, empaques, setActualizarMateriales } = useContext(MaterialContext);
+  const {id_tipo_semilla,nombre_semilla,detalle_semilla}=semillas
+  
+  
+  return<Tabs defaultActiveKey="1" items={items} onChange={onChange} />; }
 export default MaterialesPanel;
