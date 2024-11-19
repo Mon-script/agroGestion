@@ -31,26 +31,6 @@ export const Cosechas = () => {
       setUpdate(false)
   }, [update]);
 
-  /*
-  SELECT 
-    C.id_cosecha,
-    C.id_siembra,
-    C.id_codigo_barrafk,
-    P.nombre AS nombre_producto, 
-    C.rendimiento_cosecha,
-    C.cantidad_cosecha,
-    C.id_empaquefk,
-    E.nombre_empaque,  
-    C.fecha_cosecha
-FROM 
-    COSECHA C
-INNER JOIN 
-    EMPAQUE E ON C.id_empaquefk = E.id_empaque
-INNER JOIN 
-    SIEMBRA S ON C.id_siembra = S.id_siembra
-INNER JOIN 
-    PRODUCTO P ON C.id_codigo_barrafk = P.id_codigo_barra
-  */ 
 
 
   return (

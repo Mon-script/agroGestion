@@ -1,5 +1,5 @@
 import { Sidebar } from "keep-react";
-import { TeamOutlined, UserAddOutlined, CloseCircleFilled, SunOutlined, TruckOutlined, StarOutlined, ShopOutlined, MoonOutlined, RubyOutlined } from '@ant-design/icons';
+import { TeamOutlined, UserAddOutlined, CloseCircleFilled, SunOutlined, TruckOutlined, StarOutlined, ShopOutlined, MoonOutlined, RubyOutlined, ControlOutlined } from '@ant-design/icons';
 import { NavLink } from "react-router-dom";
 import logo from '../../assets/WhatsApp Image 2024-11-11 at 16.08.54.jpeg';
 import React, { useContext } from 'react';
@@ -23,7 +23,8 @@ export const SidebarComponent = () => {
     { id: 4, nombre: 'Entradas', ruta: '/entrada', icono: <RubyOutlined size={32} color="#0adb23" /> },
     { id: 5, nombre: 'Salidas', ruta: '/salida', icono: <TruckOutlined size={32} color="#db0a0a" /> },
     { id: 6, nombre: 'Registro', ruta: '/registro', icono: <UserAddOutlined size={32} color="#db0a0a" /> },
-    { id: 7, nombre: 'Personal', ruta: '/personal', icono: <TeamOutlined size={32} color="#db0a0a" /> },
+    { id: 7, nombre: 'Materiales', ruta: '/materiales', icono: <ControlOutlined size={32} color="#db0a0a" /> },
+    { id: 8, nombre: 'Personal', ruta: '/personal', icono: <TeamOutlined size={32} color="#db0a0a" /> },
   ];
 
   const menuItems = [

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message,Skeleton } from 'antd';
+import MaterialCard from '../../tarjetas/materialCard';
 
-const MarcaSemillaForm = () => {
+
+const MarcaSemillaForm = ({data,actualizarMateriales}) => {
   const [form] = Form.useForm();
   const [showForm, setShowForm] = useState(false);
 
@@ -38,6 +40,7 @@ const MarcaSemillaForm = () => {
       <div className="bg-gray-100 p-4 shadow-md w-full flex justify-between items-center">
         <h2 className="text-3xl font-semibold text-green-700">Agregar Marca de Semilla Aquí!</h2>
         <Button
+        ghost
           type="primary"
           onClick={() => {
             setShowForm(true);
@@ -75,7 +78,7 @@ const MarcaSemillaForm = () => {
               </Form.Item>
 
               <div className="flex justify-between mt-4">
-                <Button type="primary" htmlType="submit">
+                <Button ghost type="primary" htmlType="submit">
                   Agregar
                 </Button>
                 <Button onClick={() => setShowForm(false)}>
@@ -86,6 +89,18 @@ const MarcaSemillaForm = () => {
           </div>
         </div>
       )}
+      {!showForm && (<div className="w-full mt-6 flex flex-wrap gap-4">
+                {data.length > 0 ? (
+                    data.map((item) => (
+                        <MaterialCard key={item.id} data={item} actualizarSiembra={actualizarMateriales} Form={MarcaSemillaForm}/>
+                    ))
+                ) : (
+                  <>
+                  <Skeleton active />
+                  <Skeleton active/>
+                  </>
+                )}
+            </div>)}
     </div>
   );
 };

@@ -11,14 +11,14 @@ const {registrarUsuario, getUsuarios, deleteUsuario, reintegroUsuario}= require(
 const multer=require('multer')
 const path = require('path');
 const { getEntrada } = require('../controllers/entradaController');
-const { getRiego } = require('../controllers/riegoController');
-const { getEstado } = require('../controllers/estadoController');
-const { getFerti } = require('../controllers/tipofertilizanteController');
-const { getMarcaFerti } = require('../controllers/fertilizanteMarcaController');
-const { getTipoSemilla } = require('../controllers/tipoSemillaController');
-const { getMarcaSemillas } = require('../controllers/marcaSemillaController');
+const { getRiego, createRiego } = require('../controllers/riegoController');
+const { getEstado, createEstado } = require('../controllers/estadoController');
+const { getFerti, createFerti } = require('../controllers/tipofertilizanteController');
+const { getMarcaFerti, createMarcaFerti } = require('../controllers/fertilizanteMarcaController');
+const { getTipoSemilla, createTipoSemilla } = require('../controllers/tipoSemillaController');
+const { getMarcaSemillas, createMarcaSemilla } = require('../controllers/marcaSemillaController');
 const { getSiembraActivas, postSiembra, putSiembra } = require('../controllers/siembraController');
-const { getEmpaque } = require('../controllers/empaqueController');
+const { getEmpaque, createEmpaque } = require('../controllers/empaqueController');
 const { getCosecha, registrarCosecha } = require('../controllers/cosechaController');
 
 const almacenamientoTemporal= multer.diskStorage({
@@ -65,6 +65,14 @@ router.post('/post/entrada', postEntrada);
 router.post('/postEntredaSalida', postEntredaSalida);
 router.post('/post/siembra/save', postSiembra);
 router.post('/post/cosecha/save', registrarCosecha)
+//materiales
+router.post('/post/empaque/save', createEmpaque)
+router.post('/post/riengo/save', createRiego)
+router.post('/post/estado/save', createEstado)
+router.post('/post/tipoferti/save', createFerti)
+router.post('/post/marcaferti/save', createMarcaFerti)
+router.post('/post/tiposemilla/save', createTipoSemilla)
+router.post('/post/marcasemilla/save', createMarcaSemilla)
 
 router.put('/reintegrarUsuario/:id', reintegroUsuario)
 router.put('/siembra/update', putSiembra)

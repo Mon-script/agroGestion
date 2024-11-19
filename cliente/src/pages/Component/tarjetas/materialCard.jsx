@@ -7,8 +7,9 @@ import MaterialDrawer from './materialDrawer';
 
 const { Meta } = Card;
 
-const MaterialCard = ({ nombre, detalle, id, actualizarMateriales, Form }) => {
+const MaterialCard = ({ data}) => {
   
+  const {id, nombre, detalle}= data
 
   return (
     <>
@@ -32,14 +33,14 @@ const MaterialCard = ({ nombre, detalle, id, actualizarMateriales, Form }) => {
           />
         }
         actions={[
-          <MaterialDrawer nombre={nombre} detalle={detalle} id={id} actualizarMateriales={actualizarMateriales} Form={Form} key="edit" />,
+          <MaterialDrawer nombre={nombre} detalle={detalle} id={id}   key="edit" />,
         ]}
       >
         <Meta
           avatar={<Avatar src={logo} size={24} />} 
           title={
             <span style={{ fontSize: '12px', fontWeight: 'bold' }}>
-              {nombre_producto}
+              {nombre}
             </span>
           }
           description={

@@ -26,7 +26,7 @@ module.exports.createFerti = (req, res) => {
   `;
 
   try {
-    connection.query(query, [nombre_fertilizante, detalle_fertilizante, activo], (err, results) => {
+    connection.query(query, [nombre_fertilizante, detalle_fertilizante,1], (err, results) => {
       if (err) {
         return res.status(500).json(err);
       }

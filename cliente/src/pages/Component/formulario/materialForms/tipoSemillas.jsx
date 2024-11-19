@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message,Skeleton } from 'antd';
+import MaterialCard from '../../tarjetas/materialCard';
 
-const TipoSemillaForm = () => {
+
+const TipoSemillaForm = ({data,actualizarMateriales}) => {
   const [form] = Form.useForm();
   const [showForm, setShowForm] = useState(false);
 
   const handleAddTipoSemilla = async (values) => {
     try {
-      const response = await fetch('/api/tipo-semilla', {
+      const response = await fetch('http://localhost:3000/post/tiposemilla/save', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,21 +35,52 @@ const TipoSemillaForm = () => {
   };
 
   return (
-    <div>
-      <h2>Agregar Tipo de Semilla</h2>
-      <Button onClick={() => setShowForm(true)} hidden={showForm}>Agregar</Button>
+    <div className="min-h-screen flex flex-col items-center pt-4">
+      <div className="bg-gray-100 p-4 shadow-md w-full flex justify-between items-center">
+        <h2 className="text-3xl font-semibold text-green-700">Agregar su Semilla Aquí!</h2>
+        <Button
+        ghost
+          type="primary"
+          onClick={() => {
+            setShowForm(true);
+            form.resetFields();
+          }}
+          hidden={showForm}
+        >
+          Agregar
+        </Button>
+      </div>
       {showForm && (
+       <div className="flex flex-col items-center justify-center w-full mt-8">
+        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
         <Form form={form} layout="vertical" onFinish={handleAddTipoSemilla}>
           <Form.Item label="Nombre de la Semilla" name="nombre_semilla" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
           <Form.Item label="Detalle de la Semilla" name="detalle_semilla" rules={[{ required: true }]}>
-            <Input.TextArea />
+            <Input.TextArea rows={4} placeholder="Ingresa el detalle de tipo de semillas" />
           </Form.Item>
-          <Button type="primary" htmlType="submit">Agregar</Button>
+          <div className="flex justify-between mt-4">
+          <Button ghost type="primary" htmlType="submit">Agregar</Button>
           <Button onClick={() => setShowForm(false)}>Salir</Button>
+          </div>
+          
         </Form>
+        </div>
+       </div>
       )}
+      {!showForm && (<div className="w-full mt-6 flex flex-wrap gap-4">
+                {data.length > 0 ? (
+                    data.map((item) => (
+                        <MaterialCard key={item.id} data={item} actualizarSiembra={actualizarMateriales} Form={TipoSemillaForm}/>
+                    ))
+                ) : (
+                  <>
+                  <Skeleton active />
+                  <Skeleton active/>
+                  </>
+                )}
+            </div>)}
     </div>
   );
 };

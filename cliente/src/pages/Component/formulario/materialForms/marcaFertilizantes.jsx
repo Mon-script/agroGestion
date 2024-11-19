@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message,Skeleton } from 'antd';
+import MaterialCard from '../../tarjetas/materialCard';
 
-const MarcaFertilizanteForm = () => {
+
+const MarcaFertilizanteForm = ({data,actualizarMateriales}) => {
   const [form] = Form.useForm();
   const [showForm, setShowForm] = useState(false);
 
   // Función para manejar el envío del formulario
   const handleAddMarcaFertilizante = async (values) => {
     try {
-      const response = await fetch('/api/marca-fertilizante', {
+      const response = await fetch('http://localhost:3000/post/marcaferti/save', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,6 +40,7 @@ const MarcaFertilizanteForm = () => {
       <div className="bg-gray-100 p-4 shadow-md w-full flex justify-between items-center">
         <h2 className="text-3xl font-semibold text-green-700">Agregar Marca de Fertilizante Aquí!</h2>
         <Button
+        ghost
           type="primary"
           onClick={() => {
             setShowForm(true);
@@ -75,7 +78,7 @@ const MarcaFertilizanteForm = () => {
               </Form.Item>
 
               <div className="flex justify-between mt-4">
-                <Button type="primary" htmlType="submit">
+                <Button ghost type="primary" htmlType="submit">
                   Agregar
                 </Button>
                 <Button onClick={() => setShowForm(false)}>
@@ -86,6 +89,18 @@ const MarcaFertilizanteForm = () => {
           </div>
         </div>
       )}
+      {!showForm && (<div className="w-full mt-6 flex flex-wrap gap-4">
+                {data.length > 0 ? (
+                    data.map((item) => (
+                        <MaterialCard key={item.id} data={item} actualizarSiembra={actualizarMateriales} Form={MarcaFertilizanteForm}/>
+                    ))
+                ) : (
+                  <>
+                  <Skeleton active />
+                  <Skeleton active/>
+                  </>
+                )}
+            </div>)}
     </div>
   );
 };

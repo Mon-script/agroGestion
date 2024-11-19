@@ -81,7 +81,6 @@ export const CosechaModalForm = ({siembra, actualizarSiembra,cerrarModal}) => {
             });
 
             if (!response.ok) {
-                message.danger(`Algo salio mal: ${response.status}`)
                 throw new Error(`Error en la solicitud: ${response.status}`);
             }
             if (response.ok){
@@ -102,6 +101,7 @@ export const CosechaModalForm = ({siembra, actualizarSiembra,cerrarModal}) => {
             cerrarModal()
         } catch (error) {
             console.error("Error al enviar datos:", error);
+            message.danger(`Algo salio mal`)
         }
     };
 

@@ -25,7 +25,7 @@ module.exports.createTipoSemilla = (req, res) => {
   `;
 
   try {
-    connection.query(query, [nombre_semilla, detalle_semilla, activo], (err, results) => {
+    connection.query(query, [nombre_semilla, detalle_semilla, 1], (err, results) => {
       if (err) {
         return res.status(500).json(err);
       }

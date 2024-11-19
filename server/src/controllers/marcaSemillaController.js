@@ -25,7 +25,7 @@ module.exports.createMarcaSemilla = (req, res) => {
   `;
 
   try {
-    connection.query(query, [nombre_marca, detalle, activo], (err, results) => {
+    connection.query(query, [nombre_marca, detalle, 1], (err, results) => {
       if (err) {
         return res.status(500).json(err);
       }

@@ -3,31 +3,35 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+.contenedor {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
 
-  .contenedor{
-    display: flex;
-    width: 100%;
-  }
-  
-  .sidebar-container {
-    display: flex;
-    height: 1000px;
-    width: 200px; /* Ajusta según tus necesidades */
-    background-color: #070707; /* Ajusta el color de fondo según tus necesidades */
-    
-  }
-  
-  .content-container {
-    flex: 1;
-    padding-left: 200px; /* Ajusta según el ancho de tu menú lateral */
-    padding: 20px; /* Ajusta según tus necesidades */
-    
-  }
-  
+.sidebar-container {
+  display: flex;
+  height: 100vh;
+  width: 200px; 
+  background-color: #fffcfc; 
+}
+
+.content-container {
+  flex: 1;
+  padding-left: 200px; 
+  padding: 20px;
+  height: 100vh;
+  overflow: auto; 
+}

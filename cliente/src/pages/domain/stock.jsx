@@ -1,6 +1,7 @@
 import TablasEstantes from '../Component/estante/estante'
 import "./Stockpag.css";
 import { useState, useEffect } from "react";
+import {  message, Skeleton } from "antd";
 
 
 export const Stock = () => {
@@ -78,12 +79,15 @@ export const Stock = () => {
           return resp.text();
         })
         .then(respText => console.log(respText))
-        .catch(error => console.error('Error:', error));
+        .catch(error => {console.error('Error:', error)
+          message.error('Algo salio mal')
+        });
 
 
       setStockActualizado(true)
       setCodigoProducto('');
       setEstanteria('');
+      message.success('Operacion exitosa')
       setShowForm(false)
     }
 

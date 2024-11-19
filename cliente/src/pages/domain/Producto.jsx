@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./Producto.css";
 import Modal from 'react-modal';
+import {  message, Skeleton } from "antd";
 
 
 
@@ -83,9 +84,9 @@ export const Producto = () => {
           setFileupdated(true)
 
         })
-        .catch(error => {
-          console.error(error)
-        })
+        .catch(error => {console.error('Error:', error)
+          message.error('Algo salio mal')
+        });
 
       setName('');
       setPhoto('');
@@ -93,6 +94,7 @@ export const Producto = () => {
       document.getElementById("NOMBRE").value = ""
       document.getElementById("FOTO").value = null
       setShowForm(false);
+      message.success('Operacion exitosa')
     
 
   };

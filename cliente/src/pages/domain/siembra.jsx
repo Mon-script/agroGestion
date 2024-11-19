@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Stockpag.css";
 import SiembraCard from "../Component/tarjetas/siembraCard";
-import { Card, Select, Input, Button, DatePicker, Form, message } from "antd";
+import { Card, Select, Input, Button, DatePicker, Form, message, Skeleton } from "antd";
+
 
 const { Option } = Select;
 
@@ -78,7 +79,7 @@ export const Siembra = () => {
         const day = String(d.getDate()).padStart(2, '0'); // Agrega cero si es necesario
         return `${year}-${month}-${day}`;
     };
-    
+
 
     const handleInputChange = (name, value) => {
         setFormData((prevData) => ({
@@ -98,25 +99,25 @@ export const Siembra = () => {
                 fechaRiego: formatDate(formData.fechaRiego),
                 estimacionCosechaFecha: formatDate(formData.estimacionCosechaFecha),
             };
-    
+
             const response = await fetch("http://localhost:3000/post/siembra/save", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formattedData),
             })
-    
+
             if (!response.ok) {
                 message.danger(`Algo salio mal: ${response.status}`)
                 throw new Error(`Error en la solicitud: ${response.status}`);
             }
-            if (response.ok){
+            if (response.ok) {
                 message.success("Operacion exitosa")
             }
 
-    
+
             const responseData = await response.text();
-            
-    
+
+
             setSiembraActualizado(true);
             setFormData({
                 producto: "",
@@ -139,7 +140,7 @@ export const Siembra = () => {
         setSiembraActualizado(true);
         setShowForm(false);
     };
-    
+
 
     return (
         <div className="m-4 flex flex-col items-center pt-4">
@@ -320,7 +321,13 @@ export const Siembra = () => {
                         <SiembraCard key={siembra.id} siembra={siembra} actualizarSiembra={setSiembraActualizado} />
                     ))
                 ) : (
-                    <p>No hay siembras registradas.</p>
+                    <>
+                    <Skeleton active />
+                    <Skeleton active/>
+                    <Skeleton active/>
+                    <Skeleton active/>
+                    <Skeleton active/>
+                    </>
                 )}
             </div>)}
         </div>

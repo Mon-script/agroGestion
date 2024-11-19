@@ -16,6 +16,7 @@ import { UserProvider } from './userContext';
 import Siembra from './pages/domain/siembra';
 import { MaterialProvider } from './materialContext';
 import { Cosechas } from './pages/domain/cosecha';
+import MaterialesPanel from './pages/domain/materiales';
 
 
 
@@ -41,6 +42,7 @@ function App() {
               <Route path='/home' element={<Home />} />
               <Route path='/registro' element={<RegistroUsuario />} />
               <Route path='personal' element={<TablaUsuario />} />
+              <Route path='materiales' element={<MaterialesPanel />} />
               <Route path='*' element={<NotFound />} />
             </Route>
           </Route>
